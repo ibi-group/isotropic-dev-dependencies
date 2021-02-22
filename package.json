@@ -56,5 +56,5 @@
         "prepublishOnly": "pinst --disable",
         "pretest": "npm run lint"
     },
-    "version": "0.1.0"
+    "version": "0.1.1"
 }
