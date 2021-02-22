@@ -1,0 +1,97 @@
+{
+    "env": {
+        "browser": {
+            "presets": [[
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "browsers": "last 2 years"
+                    }
+                }
+            ]]
+        },
+        "browser-minify": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "targets": {
+                            "browsers": "last 2 years"
+                        }
+                    }
+                ],
+                "babel-preset-minify"
+            ]
+        },
+        "browser-minify-no-mangle": {
+            "presets": [[
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "browsers": "last 2 years"
+                    }
+                }
+            ], [
+                "babel-preset-minify",
+                {
+                    "mangle": false
+                }
+            ]]
+        },
+        "node": {
+            "presets": [[
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]]
+        },
+        "node-minify": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "targets": {
+                            "node": "current"
+                        }
+                    }
+                ],
+                "babel-preset-minify"
+            ]
+        },
+        "node-minify-no-mangle": {
+            "presets": [[
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ], [
+                "babel-preset-minify",
+                {
+                    "mangle": false
+                }
+            ]]
+        },
+        "test": {
+            "plugins": [
+                "babel-plugin-istanbul"
+            ],
+            "presets": [[
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]]
+        }
+    },
+    "plugins": [
+        "babel-plugin-transform-line"
+    ],
+    "sourceMaps": "inline"
+}

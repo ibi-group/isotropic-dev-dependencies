@@ -1,0 +1,17 @@
+{
+    "branches": 100,
+    "check-coverage": false,
+    "functions": 100,
+    "instrument": false,
+    "lines": 100,
+    "per-file": false,
+    "reporter": [
+        "lcov",
+        "text-summary"
+    ],
+    "require": [
+        "isotropic-dev-dependencies/lib/babel-register.js"
+    ],
+    "sourceMap": false,
+    "statements": 100
+}
