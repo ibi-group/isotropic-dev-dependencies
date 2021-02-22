@@ -17,13 +17,13 @@
         "@babel/preset-env": "~7.12.17",
         "@babel/register": "~7.12.13",
         "babel-plugin-istanbul": "~6.0.0",
-        "babel-plugin-transform-line": "~0.9.0",
+        "babel-plugin-transform-line": "~0.10.0",
         "babel-preset-minify": "~0.5.1",
         "chai": "~4.3.0",
         "cross-env": "~7.0.3",
         "eslint": "~7.20.0",
         "eslint-find-rules": "3.6.1",
-        "eslint-plugin-isotropic": "~0.6.0",
+        "eslint-plugin-isotropic": "~0.7.0",
         "husky": "~5.0.9",
         "mocha": "~8.3.0",
         "nyc": "~15.1.0",
@@ -56,5 +56,5 @@
         "prepublishOnly": "pinst --disable",
         "pretest": "npm run lint"
     },
-    "version": "0.0.0"
+    "version": "0.1.0"
 }
