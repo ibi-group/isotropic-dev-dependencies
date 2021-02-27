@@ -1,15 +1,5 @@
 {
     "author": "Steven Olmsted <steven.olmsted@ibigroup.com>",
-    "bin": {
-        "babel": "./node_modules/.bin/babel",
-        "cross-env": "./node_modules/.bin/cross-env",
-        "eslint": "./node_modules/.bin/eslint",
-        "eslint-find-rules": "./node_modules/.bin/eslint-find-rules",
-        "husky": "./node_modules/.bin/husky",
-        "mocha": "./node_modules/.bin/mocha",
-        "nyc": "./node_modules/.bin/nyc",
-        "pinst": "./node_modules/.bin/pinst"
-    },
     "bugs": "https://github.com/ibi-group/isotropic-dev-dependencies/issues",
     "dependencies": {
         "@babel/cli": "~7.12.17",
@@ -56,5 +46,5 @@
         "prepublishOnly": "pinst --disable",
         "pretest": "npm run lint"
     },
-    "version": "0.1.1"
+    "version": "0.1.2"
 }
