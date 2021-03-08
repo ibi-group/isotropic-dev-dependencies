@@ -14,10 +14,10 @@
         "eslint": "~7.20.0",
         "eslint-find-rules": "3.6.1",
         "eslint-plugin-isotropic": "~0.7.0",
+        "exitzero": "~1.0.1",
         "husky": "~5.0.9",
         "mocha": "~8.3.0",
-        "nyc": "~15.1.0",
-        "pinst": "~2.1.4"
+        "nyc": "~15.1.0"
     },
     "description": "Common development dependencies used by Isotropic",
     "engines": {
@@ -40,10 +40,8 @@
     "scripts": {
         "build": "cross-env BABEL_ENV=node-minify babel --config-file ./config/babel.json js -d lib",
         "lint": "eslint -c ./config/eslint-module.json --no-eslintrc js",
-        "postinstall": "husky install ./hooks",
-        "postpublish": "pinst --enable",
+        "postinstall": "exitzero husky install ./hooks",
         "prepare": "npm run build",
-        "prepublishOnly": "pinst --disable",
         "pretest": "npm run lint"
     },
     "version": "0.1.2"
