@@ -1,3 +1,1 @@
-export {
-    default
-} from 'chai';
+export * as default from 'chai';
