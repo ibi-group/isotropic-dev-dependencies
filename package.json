@@ -19,7 +19,7 @@
     },
     "description": "Common development dependencies used by Isotropic",
     "engines": {
-        "node": "^22.5.0",
+        "node": "^22.5.1",
         "npm": "^10.8.2"
     },
     "files": [
