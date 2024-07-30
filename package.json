@@ -3,19 +3,19 @@
     "bugs": "https://github.com/ibi-group/isotropic-dev-dependencies/issues",
     "dependencies": {
         "@babel/cli": "~7.24.7",
-        "@babel/core": "~7.24.7",
-        "@babel/preset-env": "~7.24.7",
+        "@babel/core": "~7.25.2",
+        "@babel/preset-env": "~7.25.2",
         "babel-plugin-istanbul": "~7.0.0",
         "babel-plugin-transform-line": "~0.10.0",
         "babel-preset-minify": "~0.5.2",
         "c8": "~10.1.2",
         "chai": "~5.1.1",
         "cross-env": "~7.0.3",
-        "eslint": "~9.7.0",
+        "eslint": "~9.8.0",
         "eslint-plugin-isotropic": "~0.7.0",
         "fs-extra": "~11.2.0",
         "globals": "~15.8.0",
-        "mocha": "~10.6.0"
+        "mocha": "~10.7.0"
     },
     "description": "Common development dependencies used by Isotropic",
     "engines": {
