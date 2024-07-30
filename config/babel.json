@@ -42,13 +42,24 @@
             "presets": [[
                 "@babel/preset-env",
                 {
+                    "modules": false,
                     "targets": {
                         "node": "current"
                     }
                 }
             ]]
         },
-        "node-minify": {
+        "node-cjs": {
+            "presets": [[
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]]
+        },
+        "node-cjs-minify": {
             "presets": [
                 [
                     "@babel/preset-env",
@@ -61,10 +72,40 @@
                 "babel-preset-minify"
             ]
         },
+        "node-cjs-minify-no-mangle": {
+            "presets": [[
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ], [
+                "babel-preset-minify",
+                {
+                    "mangle": false
+                }
+            ]]
+        },
+        "node-minify": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": false,
+                        "targets": {
+                            "node": "current"
+                        }
+                    }
+                ],
+                "babel-preset-minify"
+            ]
+        },
         "node-minify-no-mangle": {
             "presets": [[
                 "@babel/preset-env",
                 {
+                    "modules": false,
                     "targets": {
                         "node": "current"
                     }
@@ -83,6 +124,7 @@
             "presets": [[
                 "@babel/preset-env",
                 {
+                    "modules": false,
                     "targets": {
                         "node": "current"
                     }
