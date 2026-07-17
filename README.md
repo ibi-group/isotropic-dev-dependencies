@@ -9,7 +9,7 @@ A shared package of common development dependencies and configurations used acro
 
 - **Single Source of Truth**: Maintain consistent development dependencies across multiple projects
 - **Version Synchronization**: Update dependencies in one place and propagate to all dependent projects
-- **Shared Configurations**: Common configuration files for Babel, ESLint, c8, and other tools
+- **Shared Configurations**: Common configuration files for ESLint, c8, and other tools
 - **Simplified Setup**: Easy integration of standard development tools with minimal boilerplate
 - **Git Hooks**: Automated setup of git hooks for commit validation
 
@@ -25,15 +25,15 @@ npm install --save-dev isotropic-dev-dependencies
 
 This package bundles common development dependencies to ensure consistency across projects:
 
-- **Build Tools**: Babel (CLI, core, presets)
-- **Testing**: Mocha, Chai
-- **Code Coverage**: c8 with Istanbul
-- **Linting**: ESLint with Isotropic plugin
-- **Utilities**: cross-env, fs-extra, globals
+- **Testing**: The [Node.js built-in test runner](https://nodejs.org/api/test.html) (`node:test`) with Chai assertions
+- **Code Coverage**: c8
+- **Linting**: ESLint with the Isotropic plugin
+- **Utilities**: fs-extra, globals
+
+> **Note:** This package no longer bundles Babel, Mocha, or cross-env. Isotropic targets a current Node.js release (Node 26+) and runs its ES module source directly, so there is no build/transpile step. Tests run on the Node.js built-in test runner instead of Mocha.
 
 ### Shared Configurations
 
-- **Babel**: Multiple environment configurations for different build targets
 - **c8**: Code coverage configuration with high standards (100% coverage targets)
 - **ESLint**: Standard linting rules for both CommonJS and ES modules
 - **Git Hooks**: Pre-commit hooks for validation
@@ -42,37 +42,18 @@ This package bundles common development dependencies to ensure consistency acros
 
 ### Basic Setup
 
-After installing the package, you can reference its configurations in your project:
+After installing the package, reference its configurations in your project.
+
+Because Isotropic publishes its ES module source directly, source now lives in (and is published from) the `lib` directory and there is no separate build output. Lint and test point at `lib` and `test`:
 
 ```json
 // package.json
 {
     "scripts": {
-        "build": "cross-env BABEL_ENV=node-minify babel --config-file ./node_modules/isotropic-dev-dependencies/config/babel.json js -d lib --delete-dir-on-start",
-        "lint": "eslint js test",
-        "test": "cross-env BABEL_ENV=test c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json mocha --import=isotropic-dev-dependencies/lib/register-babel-loader.js"
+        "lint": "eslint lib test",
+        "test": "c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json node --test"
     }
 }
-```
-
-The `cross-env` utility fixes issues setting inline environment variables in certain runtime environments.
-
-### Babel Configuration
-
-The package provides multiple Babel environments:
-
-- `browser`: Modern browsers (last 2 years)
-- `browser-minify`: Browser targets with minification
-- `browser-minify-no-mangle`: Minification without name mangling
-- `node`: Current Node.js (ESM)
-- `node-cjs`: Current Node.js (CommonJS)
-- `node-minify`: Node.js with minification
-- `test`: Testing environment with code coverage
-
-To use in your build scripts:
-
-```bash
-cross-env BABEL_ENV=node-minify babel --config-file ./node_modules/isotropic-dev-dependencies/config/babel.json js -d lib
 ```
 
 ### ESLint Integration
@@ -91,35 +72,38 @@ export {
 
 When your package depends on `isotropic-dev-dependencies` it will automatically bring in `eslint` because `isotropic-dev-dependencies` depends on `eslint`. However, a lot of packages depend on `eslint`. If you have other dependencies that also depend on `eslint`, you may have to declare `eslint` as a dependency of your package to ensure that you get the correct version of `eslint`.
 
-### Testing with Mocha and Chai
+### Testing with the Node.js Test Runner and Chai
+
+Tests use the Node.js built-in test runner. Import `describe`/`it` (and any other helpers) directly from `node:test`, which is always available and needs no dependency declaration. Chai is provided by this package for assertions:
 
 ```js
 // test/test.js
 import _chai from 'isotropic-dev-dependencies/lib/chai.js';
-import _mocha from 'isotropic-dev-dependencies/lib/mocha.js';
+import _test from 'node:test';
 
-_mocha.describe('My Test Suite', () => {
-    _mocha.it('should pass', () => {
+_test.describe('My Test Suite', () => {
+    _test.it('should pass', () => {
         _chai.expect(true).to.be.true;
     });
 });
 ```
 
-Then set your test script to:
+Then set your test script to run the test runner under c8:
 
 ```bash
-cross-env BABEL_ENV=test c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json mocha --import=isotropic-dev-dependencies/lib/register-babel-loader.js
+c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json node --test
 ```
+
+`node --test` automatically discovers test files in your `test` directory. Because the source is no longer transpiled, coverage maps directly to the files in `lib`.
 
 ### c8 Configuration
 
 - 100% coverage requirements for statements, branches, functions, and lines
 - LCOV and text-summary reporters
-- Inline source maps
 
 ### Git Hooks
 
-Git hooks are automatically installed during the `prepare` script. They validate committer information against package.json author and contributors.
+Git hooks are automatically installed during the `prepare` script. They validate committer information against the package.json author and contributors. When there is no `.git` directory (for example, when the package is installed as a dependency), hook installation is skipped silently.
 
 ## Examples
 
@@ -129,18 +113,16 @@ Git hooks are automatically installed during the `prepare` script. They validate
 {
     "name": "my-package",
     "devDependencies": {
-        "eslint": "~9.8.0",
+        "eslint": "~10.5.0",
         "isotropic-dev-dependencies": "~0.3.0"
     },
     "scripts": {
-        "build": "cross-env BABEL_ENV=node-minify babel --config-file ./node_modules/isotropic-dev-dependencies/config/babel.json js -d lib --delete-dir-on-start",
-        "lint": "eslint js test",
-        "postprepare": "node ./node_modules/isotropic-dev-dependencies/lib/install-git-hooks.js",
-        "posttest": "[ -z \"$npm_config_coverage\" ] || c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json check-coverage",
-        "prepare": "npm run build",
-        "prepublishOnly": "npm test --coverage",
+        "lint": "eslint lib test",
+        "posttest": "c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json check-coverage",
+        "prepare": "node ./node_modules/isotropic-dev-dependencies/lib/install-git-hooks.js",
+        "prepublishOnly": "npm test",
         "pretest": "npm run lint",
-        "test": "cross-env BABEL_ENV=test c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json mocha --import=isotropic-dev-dependencies/lib/register-babel-loader.js"
+        "test": "c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json node --test"
     },
     "type": "module",
     "version": "0.0.0"
