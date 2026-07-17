@@ -5,7 +5,7 @@
         "c8": "~11.0.0",
         "chai": "~6.2.2",
         "eslint": "~10.7.0",
-        "eslint-plugin-isotropic": "~0.8.1",
+        "eslint-plugin-isotropic": "~0.9.0",
         "fs-extra": "~11.3.6",
         "globals": "~17.6.0"
     },
@@ -37,5 +37,5 @@
         "pretest": "npm run lint"
     },
     "type": "module",
-    "version": "0.3.1"
+    "version": "0.4.0"
 }
