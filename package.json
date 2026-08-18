@@ -30,7 +30,10 @@
     ],
     "license": "BSD-3-Clause",
     "name": "isotropic-dev-dependencies",
-    "repository": "github:ibi-group/isotropic-dev-dependencies",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ibi-group/isotropic-dev-dependencies.git"
+    },
     "scripts": {
         "lint": "eslint eslint.config.js lib",
         "prepare": "node ./lib/install-git-hooks.js",
