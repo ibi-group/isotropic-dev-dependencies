@@ -4,7 +4,7 @@
     "dependencies": {
         "c8": "~12.0.0",
         "chai": "~6.2.2",
-        "eslint": "~10.8.1",
+        "eslint": "~10.9.0",
         "eslint-plugin-isotropic": "~0.9.0",
         "fs-extra": "~11.4.0",
         "globals": "~17.11.0"
