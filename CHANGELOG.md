@@ -1,4 +1,16 @@
-# Changelog
+# isotropic-dev-dependencies Changelog
+
+## 0.5.0 - 2026-08-23
+
+### Changed
+
+- `c8` bumped to `~12.0.0`, `eslint` to `~10.9.0`, `fs-extra` to `~11.4.0`, and `globals` to `~17.11.0`.
+- `c8` 12 is a major bump of the coverage tool. The shared `config/c8.json` thresholds are unchanged, but consuming packages will run coverage under the new major version.
+- `eslint-plugin-isotropic` updated to the latest release.
+- Recommends `node ^26.7.0` / `npm ^11.19.0`.
+- `repository` now uses npm's preferred object form with explicit `type` and `url` properties rather than the `github:` shorthand. This is package metadata only.
+
+No runtime behavior changed in this release.
 
 ## 0.4.0 - 2026-07-16
 
@@ -63,7 +75,8 @@ For a package that follows the Isotropic conventions:
 
 ### Changed
 
-A comprehensive README was added, documenting each shared configuration and how consuming packages wire it up. Tool version bumps.
+- A comprehensive README was added, documenting each shared configuration and how consuming packages wire it up.
+- Tool version bumps.
 
 ## 0.3.0 - 2024-07-30
 
